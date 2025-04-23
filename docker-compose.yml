@@ -2,7 +2,7 @@ services:
   bytebin:
     image: ghcr.io/lucko/bytebin
     ports:
-      - 3001:8080
+      - 3001:80
     volumes:
       - data:/opt/bytebin/content
       - db:/opt/bytebin/db
