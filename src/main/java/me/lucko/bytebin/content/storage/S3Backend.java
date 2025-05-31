@@ -105,8 +105,6 @@ public class S3Backend implements StorageBackend {
 
     @Override
     public void save(Content content) throws Exception {
-        System.out.println("Content: "+content.getKey());
-
         PutObjectResponse response = this.client.putObject(
                 PutObjectRequest.builder()
                         .bucket(this.bucketName)
@@ -115,8 +113,6 @@ public class S3Backend implements StorageBackend {
                         .build(),
                 RequestBody.fromBytes(content.getContent())
         );
-
-        System.out.println("Uploaded: "+response.sdkHttpResponse().statusCode());
     }
 
     @Override
