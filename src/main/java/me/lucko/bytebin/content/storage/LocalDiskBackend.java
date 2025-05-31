@@ -61,7 +61,7 @@ public class LocalDiskBackend implements StorageBackend {
     public LocalDiskBackend(String backendId, Path contentPath) throws IOException {
         this.backendId = backendId;
         this.contentPath = contentPath;
-        System.out.println("LocalDiskBackend: contentPath = " + new File(".").toPath());
+        System.out.println("LocalDiskBackend: contentPath = " + contentPath.getParent().toAbsolutePath());
 
         // initialise
         Files.createDirectories(this.contentPath);

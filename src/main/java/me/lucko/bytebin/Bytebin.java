@@ -115,7 +115,6 @@ public final class Bytebin implements AutoCloseable {
         List<StorageBackend> storageBackends = new ArrayList<>();
 
         LocalDiskBackend localDiskBackend = new LocalDiskBackend("local", Paths.get("content"));
-        storageBackends.add(localDiskBackend);
 
         StorageBackendSelector backendSelector;
         if (config.getBoolean(Option.S3, false)) {
@@ -134,6 +133,7 @@ public final class Bytebin implements AutoCloseable {
         } else {
             backendSelector = new StorageBackendSelector.Static(localDiskBackend);
         }
+        storageBackends.add(localDiskBackend);
 
         this.indexDatabase = ContentIndexDatabase.initialise(storageBackends);
 
