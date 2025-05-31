@@ -42,6 +42,7 @@ import software.amazon.awssdk.services.s3.model.HeadObjectResponse;
 import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
 import software.amazon.awssdk.services.s3.model.NoSuchKeyException;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 import software.amazon.awssdk.services.s3.model.S3Object;
 import software.amazon.awssdk.services.s3.paginators.ListObjectsV2Iterable;
 
@@ -104,7 +105,9 @@ public class S3Backend implements StorageBackend {
 
     @Override
     public void save(Content content) throws Exception {
-        this.client.putObject(
+        System.out.println("Content: "+content.getKey());
+
+        PutObjectResponse response = this.client.putObject(
                 PutObjectRequest.builder()
                         .bucket(this.bucketName)
                         .key(content.getKey())
@@ -112,6 +115,8 @@ public class S3Backend implements StorageBackend {
                         .build(),
                 RequestBody.fromBytes(content.getContent())
         );
+
+        System.out.println("Uploaded: "+response.sdkHttpResponse().statusCode());
     }
 
     @Override

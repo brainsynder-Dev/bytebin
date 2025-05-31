@@ -68,7 +68,6 @@ public class Configuration {
     }
 
     private <T> T get(Option option, T def, Function<String, T> parser, Function<JsonElement, T> jsonParser) {
-        System.out.println("Getting option: "+option.keySystemProperty + " | "+option.keyEnvironmentVariable);
         String value = System.getProperty(option.keySystemProperty);
         if (value != null) {
             return parser.apply(value);
