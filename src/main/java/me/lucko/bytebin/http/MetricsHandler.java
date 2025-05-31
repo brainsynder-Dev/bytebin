@@ -41,7 +41,7 @@ public final class MetricsHandler implements Route.Handler {
     public Context apply(@Nonnull Context ctx) throws Exception {
         // deny requests via the reverse proxy
         if (ctx.header("X-Forwarded-For").isPresent()) {
-            // throw new StatusCodeException(StatusCode.UNAUTHORIZED);
+            throw new StatusCodeException(StatusCode.UNAUTHORIZED);
         }
 
         String contentType = TextFormat.chooseContentType(ctx.header("Accept").valueOrNull());
