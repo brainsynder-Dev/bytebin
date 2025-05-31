@@ -233,6 +233,10 @@ public class ContentStorageHandler implements CacheLoader<String, Content> {
         return count;
     }
 
+    public ContentIndexDatabase getIndex() {
+        return index;
+    }
+
     public Executor getExecutor() {
         return this.executor;
     }

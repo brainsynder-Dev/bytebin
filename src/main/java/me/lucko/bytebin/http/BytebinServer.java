@@ -42,6 +42,7 @@ import me.lucko.bytebin.Bytebin;
 import me.lucko.bytebin.content.ContentLoader;
 import me.lucko.bytebin.content.ContentStorageHandler;
 import me.lucko.bytebin.http.admin.BulkDeleteHandler;
+import me.lucko.bytebin.http.admin.ListKeysHandler;
 import me.lucko.bytebin.logging.LogHandler;
 import me.lucko.bytebin.util.ExceptionHandler;
 import me.lucko.bytebin.util.ExpiryHandler;
@@ -145,6 +146,7 @@ public class BytebinServer extends Jooby {
 
         routes(() -> {
             post("/admin/bulkdelete", new BulkDeleteHandler(this, storageHandler, contentLoader, adminApiKeys));
+            post("/admin/list-keys", new ListKeysHandler(storageHandler.getIndex(), adminApiKeys));
         });
     }
 

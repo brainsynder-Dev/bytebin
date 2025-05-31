@@ -48,6 +48,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -160,6 +161,24 @@ public class ContentIndexDatabase implements AutoCloseable {
             LOGGER.error("[INDEX DB] Error performing sql operation", e);
             DB_ERROR_COUNTER.labels("getExpired").inc();
             return Collections.emptyList();
+        }
+    }
+
+    /**
+     * Lists all keys currently stored in the index.
+     *
+     * @return a Set of all keys (the primary key of each Content entry).
+     */
+    public Set<String> listKeys() {
+        try {
+            List<Content> allContent = this.dao.queryForAll();
+            return allContent.stream()
+                    .map(Content::getKey)
+                    .collect(Collectors.toSet());
+        } catch (SQLException e) {
+            LOGGER.error("[INDEX DB] Error performing listKeys sql operation", e);
+            DB_ERROR_COUNTER.labels("listKeys").inc();
+            return Collections.emptySet();
         }
     }
 
