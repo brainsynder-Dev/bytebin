@@ -148,9 +148,7 @@ public class BytebinServer extends Jooby {
             post("/admin/bulkdelete", new BulkDeleteHandler(this, storageHandler, contentLoader, adminApiKeys));
         });
 
-        routes(() -> {
-            get("/admin/listkeys", new ListKeysHandler(storageHandler.getIndex(), adminApiKeys));
-        });
+        get("/admin/listkeys", new ListKeysHandler(storageHandler.getIndex(), adminApiKeys));
     }
 
     public static String getMetricsLabel(Context ctx) {
