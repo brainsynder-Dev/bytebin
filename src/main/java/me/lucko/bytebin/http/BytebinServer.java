@@ -149,7 +149,7 @@ public class BytebinServer extends Jooby {
         });
 
         routes(() -> {
-            post("/admin/listkeys", new ListKeysHandler(storageHandler.getIndex(), adminApiKeys));
+            get("/admin/listkeys", new ListKeysHandler(storageHandler.getIndex(), adminApiKeys));
         });
     }
 
